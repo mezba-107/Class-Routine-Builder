@@ -254,3 +254,11 @@ font-weight:800;}
     flex-direction:column;
   }
 }
+
+
+/* INPUT PLACEHOLDER COLOR */
+.form input::placeholder {
+  color: #000;
+  opacity: 5; /* Firefox fix */
+  font-weight: 500;
+}
