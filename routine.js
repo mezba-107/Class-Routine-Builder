@@ -1,0 +1,125 @@
+const timeSlots = [
+ { start: "08:30", end: "09:45" },
+ { start: "09:45", end: "11:00" },
+ { start: "11:00", end: "12:15" },
+ { start: "12:15", end: "13:30" },
+ { start: "13:30", end: "14:45" },
+ { start: "14:45", end: "16:00" },
+ { start: "16:00", end: "17:15" },
+ { start: "17:15", end: "18:30" }
+];
+
+const colors = [
+ "linear-gradient(135deg,#667eea,#764ba2)",
+ "linear-gradient(135deg,#43cea2,#185a9d)",
+ "linear-gradient(135deg,#f7971e,#ffd200)",
+ "linear-gradient(135deg,#ff512f,#dd2476)",
+ "linear-gradient(135deg,#11998e,#38ef7d)",
+ "linear-gradient(135deg,#396afc,#2948ff)",
+ "linear-gradient(135deg,#ee0979,#ff6a00)",
+ "linear-gradient(135deg,#7f00ff,#e100ff)"
+];
+
+const subjectColors = {};
+
+function toMin(t){
+ const [h,m] = t.split(":").map(Number);
+ return h*60 + m;
+}
+
+function isOverlap(aStart,aEnd,bStart,bEnd){
+ return aStart < bEnd && aEnd > bStart;
+}
+
+// ✅ SAME SUBJECT = SAME COLOR
+function normalizeSubject(text){
+ return text
+  .toLowerCase()
+  .replace(/\s+/g," ")
+  .trim();
+}
+
+function getColor(subject){
+ const key = normalizeSubject(subject);
+ if(!subjectColors[key]){
+  subjectColors[key] =
+   colors[Object.keys(subjectColors).length % colors.length];
+ }
+ return subjectColors[key];
+}
+
+function addClass(){
+
+ const day     = document.getElementById("day").value;
+ const start   = document.getElementById("start").value;
+ const end     = document.getElementById("end").value;
+ const subject = document.getElementById("subject").value.trim();
+ const teacher = document.getElementById("teacher").value.trim();
+ const room    = document.getElementById("room").value.trim();
+
+ if(!day || !start || !end || !subject || !teacher || !room){
+  alert("সব ইনপুট পূরণ করুন");
+  return;
+ }
+
+ const classStart = toMin(start);
+ const classEnd   = toMin(end);
+
+ if(classEnd <= classStart){
+  alert("End time start time এর পরে হতে হবে");
+  return;
+ }
+
+ const row = document.querySelector(`tr[data-day="${day}"]`);
+ const color = getColor(subject);
+
+ // ❌ overlap check
+ for(let i=0;i<timeSlots.length;i++){
+  const s=timeSlots[i];
+  if(isOverlap(classStart,classEnd,toMin(s.start),toMin(s.end))){
+   if(row.children[i+1].innerHTML!==""){
+    alert("এই সময়ের মধ্যে আগেই class আছে");
+    return;
+   }
+  }
+ }
+
+ // ✅ insert
+ timeSlots.forEach((slot,i)=>{
+  if(isOverlap(classStart,classEnd,toMin(slot.start),toMin(slot.end))){
+   row.children[i+1].innerHTML=`
+    <div class="class-box" style="background:${color}">
+     <button class="delete-btn" onclick="deleteClass(this)">×</button>
+     <div class="subject">${subject}</div>
+     <div class="teacher">${teacher}</div>
+     <div class="room">Room: ${room}</div>
+     <div class="time">${start} - ${end}</div>
+    </div>
+   `;
+  }
+ });
+
+ // reset
+ document.getElementById("start").value="";
+ document.getElementById("end").value="";
+ document.getElementById("subject").value="";
+ document.getElementById("teacher").value="";
+ document.getElementById("room").value="";
+}
+
+
+function downloadRoutine(){
+ const area=document.getElementById("routineArea");
+ document.querySelectorAll(".delete-btn")
+  .forEach(b=>b.style.display="none");
+
+ html2canvas(area,{scale:3,backgroundColor:"#fff"})
+ .then(c=>{
+  const a=document.createElement("a");
+  a.download="Class_Routine.png";
+  a.href=c.toDataURL();
+  a.click();
+  document.querySelectorAll(".delete-btn")
+   .forEach(b=>b.style.display="block");
+ });
+}
