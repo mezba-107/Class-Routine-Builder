@@ -10,14 +10,14 @@ const timeSlots = [
 ];
 
 const colors = [
- "linear-gradient(135deg,#667eea,#764ba2)",
- "linear-gradient(135deg,#43cea2,#185a9d)",
- "linear-gradient(135deg,#f7971e,#ffd200)",
- "linear-gradient(135deg,#ff512f,#dd2476)",
- "linear-gradient(135deg,#11998e,#38ef7d)",
- "linear-gradient(135deg,#396afc,#2948ff)",
- "linear-gradient(135deg,#ee0979,#ff6a00)",
- "linear-gradient(135deg,#7f00ff,#e100ff)"
+ "linear-gradient(135deg,#e0e7ff,#c7d2fe)",  // soft indigo
+ "linear-gradient(135deg,#d1fae5,#a7f3d0)",  // mint green
+ "linear-gradient(135deg,#fef3c7,#fde68a)",  // soft yellow
+ "linear-gradient(135deg,#ffe4e6,#fecdd3)",  // soft pink
+ "linear-gradient(135deg,#ccfbf1,#99f6e4)",  // aqua
+ "linear-gradient(135deg,#e0f2fe,#bae6fd)",  // sky blue
+ "linear-gradient(135deg,#fce7f3,#fbcfe8)",  // rose
+ "linear-gradient(135deg,#ede9fe,#ddd6fe)"   // lavender
 ];
 
 const subjectColors = {};

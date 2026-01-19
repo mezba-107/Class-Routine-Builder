@@ -262,3 +262,29 @@ font-weight:800;}
   opacity: 5; /* Firefox fix */
   font-weight: 500;
 }
+
+
+.form select,
+.form input,
+.form button {
+  min-width: 0;   /* 🔥 MOST IMPORTANT */
+  max-width: 100%;
+}
+
+
+@media (max-width: 768px) {
+  .form > * {
+    width: 100%;
+  }
+}
+
+
+.time-group {
+  width: 100%;
+  max-width: 100%;
+}
+
+
+.form {
+  overflow: hidden; /* just in case */
+}
