@@ -2,11 +2,11 @@ const timeSlots = [
  { start: "08:30", end: "09:45" },
  { start: "09:45", end: "11:00" },
  { start: "11:00", end: "12:15" },
- { start: "12:15", end: "13:30" },
- { start: "13:30", end: "14:45" },
- { start: "14:45", end: "16:00" },
- { start: "16:00", end: "17:15" },
- { start: "17:15", end: "18:30" }
+ { start: "12:15", end: "01:30" },
+ { start: "01:30", end: "02:45" },
+ { start: "02:45", end: "04:00" },
+ { start: "04:00", end: "05:15" },
+ { start: "05:15", end: "06:30" }
 ];
 
 const colors = [
