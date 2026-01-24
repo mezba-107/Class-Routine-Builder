@@ -23,9 +23,16 @@ const colors = [
 const subjectColors = {};
 
 function toMin(t){
- const [h,m] = t.split(":").map(Number);
+ let [h,m] = t.split(":").map(Number);
+
+ // after 12:00 and before 7:00 → PM (add 12 hours)
+ if(h < 7){
+  h += 12;
+ }
+
  return h*60 + m;
 }
+
 
 function isOverlap(aStart,aEnd,bStart,bEnd){
  return aStart < bEnd && aEnd > bStart;
