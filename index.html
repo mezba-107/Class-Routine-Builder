@@ -1,77 +1,185 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  
-  <title>Dynamic Class Routine</title>
+  <head>
+    <meta charset="UTF-8" />
 
-  <link rel="stylesheet" href="/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-</head>
-<body>
+    <title>Dynamic Class Routine</title>
 
-<h2 class="title">SUB Spring 2026 CSE (63) Class Schedule</h2>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/dom-to-image-more@3.3.0/dist/dom-to-image-more.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <h2 class="title" id="scheduleTitle">SUB CSE (63) Class Schedule</h2>
 
-<div class="form">
-  <select id="day">
-    <option>Sunday</option>
-    <option>Monday</option>
-    <option>Tuesday</option>
-    <option>Wednesday</option>
-    <option>Thursday</option>
-    <option>Friday</option>
-  </select>
+    <p id="scheduleSection"></p>
 
-<div class="time-group">
-  <div class="time-field">
-    <label for="start">Start Time</label>
-    <input type="time" id="start">
-  </div>
+    <div class="form">
+      <select id="section">
+        <option value="">Select Section</option>
+        <option value="B1">B1</option>
+        <option value="B2">B2</option>
+      </select>
 
-  <div class="time-field">
-    <label for="end">End Time</label>
-    <input type="time" id="end">
-  </div>
-</div>
+      <button id="titleBtn" onclick="updateTitle()">Update Title</button>
 
-  <input type="text" id="subject" placeholder="Subject">
-  <input type="text" id="teacher" placeholder="Teacher">
-  <input type="text" id="room" placeholder="Room">
+      <select id="day">
+        <option>Sunday</option>
+        <option>Monday</option>
+        <option>Tuesday</option>
+        <option>Wednesday</option>
+        <option>Thursday</option>
+        <option>Friday</option>
+      </select>
 
-  <button onclick="addClass()">Add Class</button>
-</div>
+      <div class="time-group">
+        <div class="time-field">
+          <label for="start">Start Time</label>
+          <input type="time" id="start" />
+        </div>
 
-<div class="routine-wrapper" id="routineArea">
+        <div class="time-field">
+          <label for="end">End Time</label>
+          <input type="time" id="end" />
+        </div>
+      </div>
 
-<table class="routine">
-  <thead>
-    <tr>
-      <th>Day / Time</th>
-      <th>08:30-09:45</th>
-      <th>09:45-11:00</th>
-      <th>11:00-12:15</th>
-      <th>12:15-01:30</th>
-      <th>01:30-02:45</th>
-      <th>02:45-04:00</th>
-      <th>04:00-05:15</th>
-      <th>05:15-06:30</th>
-    </tr>
-  </thead>
+      <input type="text" id="subject" placeholder="Subject" />
+      <input type="text" id="teacher" placeholder="Teacher" />
+      <input type="text" id="room" placeholder="Room" />
 
-  <tbody>
-    <tr data-day="Sunday"><td class="day">Sunday</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr data-day="Monday"><td class="day">Monday</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr data-day="Tuesday"><td class="day">Tuesday</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr data-day="Wednesday"><td class="day">Wednesday</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr data-day="Thursday"><td class="day">Thursday</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr data-day="Friday"><td class="day">Friday</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-  </tbody>
-</table>
+      <button id="saveBtn" onclick="addClass()">Add Class</button>
+    </div>
 
-<button class="download-btn" onclick="downloadRoutine()">⬇ Download Routine</button>
+    <div class="routine-wrapper" id="routineArea">
+      <table class="routine">
+        <thead>
+          <tr>
+            <th>Day / Time</th>
+            <th>08:30-09:45</th>
+            <th>09:45-11:00</th>
+            <th>11:00-12:15</th>
+            <th>12:15-01:30</th>
+            <th>01:30-02:45</th>
+            <th>02:45-04:00</th>
+            <th>04:00-05:15</th>
+            <th>05:15-06:30</th>
+          </tr>
+        </thead>
 
-</div>
+        <tbody>
+          <tr data-day="Sunday">
+            <td class="day">Sunday</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr data-day="Monday">
+            <td class="day">Monday</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr data-day="Tuesday">
+            <td class="day">Tuesday</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr data-day="Wednesday">
+            <td class="day">Wednesday</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr data-day="Thursday">
+            <td class="day">Thursday</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr data-day="Friday">
+            <td class="day">Friday</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
 
-<script src="/script.js"></script>
-</body>
+      <button class="download-btn" onclick="downloadRoutine()">
+        ⬇ Download Routine
+      </button>
+    </div>
+
+    <!-- ================= Edit Modal ================= -->
+    <div id="editModal" class="modal">
+      <div class="modal-content">
+        <h2>Edit Class</h2>
+
+        <label>Day</label>
+        <select id="editDay">
+          <option>Sunday</option>
+          <option>Monday</option>
+          <option>Tuesday</option>
+          <option>Wednesday</option>
+          <option>Thursday</option>
+          <option>Friday</option>
+        </select>
+
+        <label>Start Time</label>
+        <input type="time" id="editStart" />
+
+        <label>End Time</label>
+        <input type="time" id="editEnd" />
+
+        <label>Subject</label>
+        <input type="text" id="editSubject" />
+
+        <label>Teacher</label>
+        <input type="text" id="editTeacher" />
+
+        <label>Room</label>
+        <input type="text" id="editRoom" />
+
+        <div class="modal-buttons">
+          <button onclick="closeModal()">Cancel</button>
+
+          <button id="updateBtn" onclick="updateClass()">Update</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/script.js"></script>
+  </body>
 </html>
